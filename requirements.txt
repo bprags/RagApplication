@@ -1,0 +1,7 @@
+chromadb
+sentence-transformers
+bs4
+pdfplumber
+openai
+google-generativeai
+python-dotenv
