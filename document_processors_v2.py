@@ -476,8 +476,16 @@ if __name__ == "__main__":
         embedding_model="text-embedding-3-small"  # Higher quality alternative
     )
     
+    import sys
+    
+    urlToIndex = sys.argv[1] if len(sys.argv) > 1 else None
+    
+    if( urlToIndex == None):
+        print("No URL provided, using default URL")
+        exit(0)
+    
     # Process individual files
-    indexer.process_file("https://www.crash.net/bsb/results/1074861/1/2025-british-superbikes-snetterton-race-results-1", "html")
+    indexer.process_file(urlToIndex, "html")
     #indexer.process_file("technical_manual.pdf", "pdf")
     
     # # Process entire directory

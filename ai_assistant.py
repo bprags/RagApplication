@@ -46,7 +46,7 @@ class AIAssistant:
             f"Context {i+1}:\n{chunk['content'][:500]}" for i, chunk in enumerate(context_chunks)
         )
         prompt = (
-            f"Answer the following question using the provided context.\n\n"
+            f"Answer the following question using the provided context, stick to the information provided in the context ONLY, If you do not know the answer, just say that you don't know.\n\n"
             f"{context_text}\n\n"
             f"Question: {query}\n\n"
             f"Answer:"
@@ -79,8 +79,11 @@ if __name__ == "__main__":
     ai = OpenAI(model_name="text-embedding-3-small", llm_model="gpt-3.5-turbo")
     assistant = AIAssistant(chroma_client, ai, collection_name="html_documents")
 
-    query = "British superbike results?"
-    answer = assistant.answer_query(query)
-    
-    print("\n--- Final Answer ---\n")
-    print(answer)
+    while True:
+        query = input("Enter your question (or 'q' to quit): ")
+        if query.lower() == 'q':
+            break
+        answer = assistant.answer_query(query)
+        print("\n--- Answer ---\n")
+        print(answer)
+ 
